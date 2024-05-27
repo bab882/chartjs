@@ -1,4 +1,3 @@
-// Configuration du plugin
 const backgroundPlugin = {
   id: "customCanvasBackgroundColor",
   beforeDraw: (chart, args, options) => {
@@ -11,7 +10,7 @@ const backgroundPlugin = {
 };
 Chart.register(backgroundPlugin);
 
-// Graphique additionel des tickets
+// Graphique additionnel des tickets
 const ctx = document.getElementById("myChart").getContext("2d");
 const myChart = new Chart(ctx, {
   type: "bar",
@@ -102,7 +101,6 @@ const pieChartContext = document.getElementById("pieChart").getContext("2d");
 const pieChart = new Chart(pieChartContext, {
   type: "pie",
   data: {
-    
     datasets: [
       {
         label: "Couleurs préférées",
@@ -119,8 +117,15 @@ const pieChart = new Chart(pieChartContext, {
     circumference: 180,
     rotation: -90,
     borderRadius: 20,
-    cutout: "240",
-    width: 300,
+    cutout: "90%",
+    layout: {
+      padding: {
+        top: 30,
+        right: 30,
+        bottom: 30,
+        left: 30
+      },
+    },
     plugins: {
       legend: {
         position: "top",
@@ -128,8 +133,34 @@ const pieChart = new Chart(pieChartContext, {
       title: {
         display: true,
         text: "Suivi du support",
-        font: 'Roboto',
+        font: {
+          family: 'Roboto',
+        },
+        
       },
+      datalabels: {
+        display: true,
+        anchor: 'center',
+        align: 'bottom',
+        color: '#000',
+        padding: 95,
+        font: {
+          weight: 'bold',
+          family: 'Roboto',
+          size: 50
+        },
+        formatter: function(value, context) {
+          return value + '%' ;
+        },
+        hover: {
+          mode: null,
+        },
+        interaction: {
+          mode: null, 
+          intersect: false,
+        },
+      }
     },
   },
+  plugins: [ChartDataLabels],
 });
